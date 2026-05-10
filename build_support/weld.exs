@@ -32,7 +32,7 @@ defmodule GEPAFramework.Build.WeldContract do
       ],
       output: [
         docs: ["README.md"],
-        assets: []
+        assets: ["assets/gepa_framework.svg"]
       ],
       verify: [
         artifact_tests: ["test"],
