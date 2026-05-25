@@ -57,7 +57,8 @@ defmodule GEPAFramework.MixProject do
     [
       licenses: ["MIT"],
       links: %{"GitHub" => @source_url},
-      files: ~w(lib assets build_support mix.exs README.md LICENSE AGENTS.md .formatter.exs)
+      files:
+        ~w(lib assets build_support guides mix.exs README.md LICENSE AGENTS.md .formatter.exs)
     ]
   end
 
@@ -78,7 +79,19 @@ defmodule GEPAFramework.MixProject do
   defp docs do
     [
       main: "readme",
-      extras: ["README.md"],
+      extras: [
+        "README.md",
+        {"guides/index.md", filename: "guides_index"},
+        "guides/generalized_stack.md",
+        "guides/eval_and_promotion.md",
+        "guides/stacklab_acceptance.md",
+        "guides/qc_and_operations.md"
+      ],
+      groups_for_extras: [
+        Overview: ["README.md", "guides/index.md"],
+        Architecture: ["guides/generalized_stack.md", "guides/eval_and_promotion.md"],
+        Operations: ["guides/stacklab_acceptance.md", "guides/qc_and_operations.md"]
+      ],
       source_ref: "main",
       source_url: @source_url,
       homepage_url: @source_url

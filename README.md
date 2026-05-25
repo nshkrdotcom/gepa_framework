@@ -19,6 +19,19 @@ The default checkpoint profile is `memory_ephemeral`. A result from this package
 does not claim restart safety unless a later governed durable profile supplies
 explicit evidence.
 
+## Quickstart
+
+```bash
+git clone https://github.com/nshkrdotcom/gepa_framework
+cd gepa_framework
+mix deps.get
+mix test
+mix ci
+```
+
+The default test path is deterministic and does not require live provider
+credentials.
+
 ## Mezzanine Adapter
 
 `GEPA.MezzanineOptimizerAdapter` implements
@@ -28,3 +41,10 @@ preserving context packet, route decision, eval, cost, promotion, rollback, and
 trace refs. The adapter never promotes a candidate or mutates production state;
 Citadel, Mezzanine, and AppKit remain responsible for authority, promotion
 truth, and product/operator projections.
+
+## Guides
+
+- `guides/generalized_stack.md`
+- `guides/eval_and_promotion.md`
+- `guides/stacklab_acceptance.md`
+- `guides/qc_and_operations.md`
