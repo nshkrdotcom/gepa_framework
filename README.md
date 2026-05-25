@@ -18,3 +18,13 @@ requirements.
 The default checkpoint profile is `memory_ephemeral`. A result from this package
 does not claim restart safety unless a later governed durable profile supplies
 explicit evidence.
+
+## Mezzanine Adapter
+
+`GEPA.MezzanineOptimizerAdapter` implements
+`Mezzanine.AIExecution.OptimizerAdapter` for same-BEAM stack mode. It turns a
+Mezzanine optimization request into deterministic GEPA candidate receipts while
+preserving context packet, route decision, eval, cost, promotion, rollback, and
+trace refs. The adapter never promotes a candidate or mutates production state;
+Citadel, Mezzanine, and AppKit remain responsible for authority, promotion
+truth, and product/operator projections.

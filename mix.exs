@@ -19,7 +19,7 @@ defmodule GEPAFramework.MixProject do
       deps: deps(),
       aliases: aliases(),
       docs: docs(),
-      dialyzer: [plt_add_deps: :apps_direct],
+      dialyzer: [plt_add_deps: :apps_direct, plt_add_apps: [:outer_brain_context_abi]],
       name: "GEPA Framework",
       description: "Reusable GEPA optimizer framework",
       source_url: @source_url,
@@ -30,7 +30,7 @@ defmodule GEPAFramework.MixProject do
   end
 
   def application do
-    [extra_applications: [:logger]]
+    [extra_applications: [:crypto, :logger, :outer_brain_context_abi]]
   end
 
   def cli do
