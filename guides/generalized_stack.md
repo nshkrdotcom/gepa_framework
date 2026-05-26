@@ -26,3 +26,8 @@ Mezzanine calls `GEPA.MezzanineOptimizerAdapter` through
 `Mezzanine.AIExecution.OptimizerAdapter`. The adapter returns candidate refs and
 bounded receipts. Mezzanine, Citadel, and AppKit remain responsible for
 admission, authority, promotion, rollback, and product/operator readback.
+
+The adapter is also the raw-payload firewall for GEPA stack mode. It accepts
+optimization facts as refs, hashes, strategies, scores, and bounded metadata;
+it rejects raw prompt/provider/memory fields, credentials, tokens,
+authorization keys, and `raw_*` attrs recursively.

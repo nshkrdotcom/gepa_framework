@@ -42,6 +42,11 @@ trace refs. The adapter never promotes a candidate or mutates production state;
 Citadel, Mezzanine, and AppKit remain responsible for authority, promotion
 truth, and product/operator projections.
 
+The NSHKR cleanup pass hardened the adapter boundary. Optimization attrs are
+recursively rejected when they contain `raw_*`, raw prompt/provider/memory
+fields, credentials, authorization, tokens, or secrets. GEPA candidates should
+carry refs, hashes, score summaries, and bounded failure reasons only.
+
 ## Guides
 
 - `guides/generalized_stack.md`

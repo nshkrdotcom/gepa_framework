@@ -7,6 +7,8 @@ mix ci
 ```
 
 The default QC path is deterministic and must not require provider credentials.
+Adapter changes must include tests for nested raw-payload rejection and
+credential/token-shaped metadata rejection before `mix ci` is accepted.
 
 ## Live Provider Posture
 

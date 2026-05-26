@@ -15,7 +15,10 @@ Candidate receipts carry:
 - rollback posture;
 - promotion recommendation only.
 
-They must not mutate production state or publish product projections.
+They must not mutate production state or publish product projections. Candidate
+metadata must remain ref/hash based; `raw_*`, raw prompt/provider/memory
+payloads, credentials, authorization headers, tokens, and secrets are rejected
+at the Mezzanine adapter boundary.
 
 ## Promotion Boundary
 
