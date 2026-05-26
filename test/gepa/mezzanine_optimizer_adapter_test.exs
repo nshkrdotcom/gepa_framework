@@ -36,6 +36,21 @@ defmodule GEPA.MezzanineOptimizerAdapterTest do
     assert "field://provider_payload" in failure.evidence_refs
   end
 
+  test "rejects credential-like and raw-prefixed optimization fields recursively" do
+    for {field, value} <- [
+          {:raw_data, "raw"},
+          {"api_key", "secret"},
+          {:token, "secret"},
+          {"authorization", "Bearer secret"},
+          {:nested, %{"raw_memory_context" => "raw"}}
+        ] do
+      request = Map.put(optimization_request(), field, value)
+
+      assert {:error, %Failure{} = failure} = MezzanineOptimizerAdapter.propose(request)
+      assert failure.reason_code == "gepa.optimization.raw_payload_rejected.v1"
+    end
+  end
+
   test "requires candidate source lineage refs" do
     request = Map.put(optimization_request(), :candidate_source_refs, [])
 

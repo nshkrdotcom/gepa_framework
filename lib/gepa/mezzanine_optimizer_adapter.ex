@@ -15,6 +15,26 @@ defmodule GEPA.MezzanineOptimizerAdapter do
   alias OuterBrain.ContextABI.Failure
 
   @forbidden_raw_fields [
+    :access_token,
+    "access_token",
+    :api_key,
+    "api_key",
+    :authorization,
+    "authorization",
+    :bearer,
+    "bearer",
+    :cookie,
+    "cookie",
+    :credential,
+    "credential",
+    :credentials,
+    "credentials",
+    :credential_material,
+    "credential_material",
+    :oauth_token,
+    "oauth_token",
+    :password,
+    "password",
     :prompt,
     "prompt",
     :raw_prompt,
@@ -29,8 +49,14 @@ defmodule GEPA.MezzanineOptimizerAdapter do
     "raw_model_output",
     :memory_body,
     "memory_body",
+    :refresh_token,
+    "refresh_token",
     :secret,
-    "secret"
+    "secret",
+    :session_id,
+    "session_id",
+    :token,
+    "token"
   ]
 
   @impl true
@@ -210,12 +236,24 @@ defmodule GEPA.MezzanineOptimizerAdapter do
 
   defp forbidden_field(input) when is_map(input) do
     Enum.find_value(input, fn {key, value} ->
-      if key in @forbidden_raw_fields, do: key, else: forbidden_field(value)
+      if forbidden_raw_field?(key), do: key, else: forbidden_field(value)
     end)
   end
 
   defp forbidden_field(input) when is_list(input), do: Enum.find_value(input, &forbidden_field/1)
   defp forbidden_field(_input), do: nil
+
+  defp forbidden_raw_field?(key) when key in @forbidden_raw_fields, do: true
+
+  defp forbidden_raw_field?(key) do
+    key
+    |> to_string()
+    |> String.downcase()
+    |> raw_or_sensitive_key?()
+  end
+
+  defp raw_or_sensitive_key?("raw"), do: true
+  defp raw_or_sensitive_key?(key), do: String.starts_with?(key, "raw_")
 
   defp first_ref(attrs, field) do
     attrs
